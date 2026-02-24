@@ -1,0 +1,62 @@
+// This is your Prisma schema for PostgreSQL (Production)
+// For local development with SQLite, see schema.prisma.sqlite
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  name      String?
+  password  String
+  role      String  @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Student {
+  id              Int     @id @default(autoincrement())
+  email           String  @unique
+  firstName       String
+  lastName        String
+  phone           String?
+  city            String?
+  major           String?
+  enrollmentYear  Int?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  enrollments     Enrollment[]
+}
+
+model Course {
+  id          Int     @id @default(autoincrement())
+  code        String  @unique
+  title       String
+  credits     Int?
+  semester    Int?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  enrollments Enrollment[]
+}
+
+model Enrollment {
+  id        Int     @id @default(autoincrement())
+  studentId Int
+  courseId  Int
+  status    String  @default("active")
+  grade     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  course  Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  @@unique([studentId, courseId])
+}
