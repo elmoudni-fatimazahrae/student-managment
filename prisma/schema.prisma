@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "libsql"
   url      = env("DATABASE_URL")
+  authToken = env("DATABASE_AUTH_TOKEN")
 }
 
 model User {
