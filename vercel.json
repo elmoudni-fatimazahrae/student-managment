@@ -6,15 +6,9 @@
   "framework": "nextjs",
   "outputDirectory": ".next",
   "env": {
-    "NEXTAUTH_URL": {
-      "required": true
-    },
-    "NEXTAUTH_SECRET": {
-      "required": true
-    },
-    "DATABASE_URL": {
-      "required": true
-    }
+    "NEXTAUTH_URL": "@nextauth_url",
+    "NEXTAUTH_SECRET": "@nextauth_secret",
+    "DATABASE_URL": "@database_url"
   },
   "functions": {
     "api/**/*.ts": {
