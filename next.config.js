@@ -5,9 +5,6 @@ const nextConfig = {
   images: {
     domains: [],
   },
-  api: {
-    responseLimit: '8mb',
-  },
 }
 
 module.exports = nextConfig

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
-import { SessionProvider } from "next-auth/react"
+import { Providers } from "@/app/providers"
 
 export const metadata: Metadata = {
   title: "Student Management System",
@@ -15,11 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SessionProvider>
-          <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-            {children}
-          </div>
-        </SessionProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )
