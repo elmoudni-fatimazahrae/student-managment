@@ -1,25 +1,25 @@
 {
   "version": 2,
-  "buildCommand": "next build && prisma generate",
+  "buildCommand": "next build && npx prisma generate",
   "devCommand": "next dev",
-  "installCommand": "npm ci",
+  "installCommand": "npm install",
   "framework": "nextjs",
   "outputDirectory": ".next",
-  "public": false,
-  "env": [
-    "NEXTAUTH_URL",
-    "NEXTAUTH_SECRET",
-    "DATABASE_URL"
-  ],
+  "env": {
+    "NEXTAUTH_URL": {
+      "required": true
+    },
+    "NEXTAUTH_SECRET": {
+      "required": true
+    },
+    "DATABASE_URL": {
+      "required": true
+    }
+  },
   "functions": {
     "api/**/*.ts": {
       "memory": 1024,
       "maxDuration": 30
-    }
-  },
-  "git": {
-    "deploymentEnabled": {
-      "main": true
     }
   }
 }
