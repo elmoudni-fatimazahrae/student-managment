@@ -1,0 +1,42 @@
+node_modules/
+.next/
+out/
+dist/
+*.db
+*.db-journal
+.env.local
+.env.*.local
+.env
+.DS_Store
+*.pem
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.turbo/
+.vercel
+prisma/dev.db
+prisma/dev.db-journal
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Data
+data/
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+*.sublime-project
+*.sublime-workspace
+*.code-workspace

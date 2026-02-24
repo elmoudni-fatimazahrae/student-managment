@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "buildCommand": "next build && prisma generate",
+  "devCommand": "next dev",
+  "installCommand": "npm ci",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "public": false,
+  "env": [
+    "NEXTAUTH_URL",
+    "NEXTAUTH_SECRET",
+    "DATABASE_URL"
+  ],
+  "functions": {
+    "api/**/*.ts": {
+      "memory": 1024,
+      "maxDuration": 30
+    }
+  },
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  }
+}

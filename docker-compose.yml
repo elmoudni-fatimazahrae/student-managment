@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-your-secret-key-change-in-production}
+      - DATABASE_URL=sqlite:///app/data/dev.db
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+
+  # Optional: PostgreSQL database service
+  # Uncomment and configure if using PostgreSQL
+  # postgres:
+  #   image: postgres:15-alpine
+  #   environment:
+  #     POSTGRES_DB: student_management
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+  #
+  # volumes:
+  #   postgres_data:
