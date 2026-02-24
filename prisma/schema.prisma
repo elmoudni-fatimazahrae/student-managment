@@ -6,9 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "libsql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
-  authToken = env("DATABASE_AUTH_TOKEN")
 }
 
 model User {
