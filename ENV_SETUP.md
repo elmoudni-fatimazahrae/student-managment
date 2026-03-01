@@ -4,14 +4,16 @@
 ```
 NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=your-secret-key-here
-DATABASE_URL=file:./prisma/dev.db
+DATABASE_URL=postgresql://postgres:password123@db.ztwfjpgoqlxdbtrqabdd.supabase.co:5432/postgres
+
+
 ```
 
 ## For Vercel Production - Option A: SQLite (Temporary Data)
 ```
 NEXTAUTH_URL=https://student-managment4-iota.vercel.app
 NEXTAUTH_SECRET=<generate with: openssl rand -base64 32>
-DATABASE_URL=file:./prisma/dev.db
+DATABASE_URL=file:postgresql://postgres:password123@db.ztwfjpgoqlxdbtrqabdd.supabase.co:5432/postgres
 ```
 
 ## For Vercel Production - Option B: PostgreSQL (Persistent) - RECOMMENDED

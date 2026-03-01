@@ -31,6 +31,8 @@ docker-compose.override.yml
 data/
 logs/
 *.log
+pg-data/
+pg_install.log
 
 # OS
 .DS_Store
