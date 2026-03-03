@@ -172,7 +172,7 @@ export default function EnrollmentsPage() {
     const studentName = getStudentName(e.studentId).toLowerCase()
     const courseName = getCourseName(e.courseId).toLowerCase()
     const q = searchQuery.toLowerCase()
-    return studentName.includes(q) || courseName.includes(q) || (e.grade || "").toLowerCase().includes(q)
+    return studentName.includes(q) || courseName.includes(q) || (e.grade || "").toLowerCase().includes(q) || e.status.toLowerCase().includes(q)
   })
 
   if (status === "loading" || !session) {
@@ -206,7 +206,8 @@ export default function EnrollmentsPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Delete Enrollment</h3>
-              <p className="text-gray-500 mb-6">Are you sure you want to delete this enrollment? This action cannot be undone.</p>
+              <p className="text-gray-500 mb-2">Are you sure you want to delete the enrollment of <strong>{(() => { const e = enrollments.find(e => e.id === deleteConfirm); return e ? `${getStudentName(e.studentId)} in ${getCourseName(e.courseId)}` : 'this enrollment'; })()}</strong>?</p>
+              <p className="text-red-500 text-sm mb-6">This action cannot be undone.</p>
               <div className="flex gap-3 justify-center">
                 <button onClick={() => setDeleteConfirm(null)} className="btn-secondary">Cancel</button>
                 <button onClick={() => handleDelete(deleteConfirm)} className="btn-danger">Delete</button>
@@ -311,7 +312,7 @@ export default function EnrollmentsPage() {
             <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
-            <input type="text" placeholder="Search enrollments..." className="input-field pl-10"
+            <input type="text" placeholder="Search by student, course, grade, status..." className="input-field pl-10"
               value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           </div>
         </div>
@@ -335,7 +336,7 @@ export default function EnrollmentsPage() {
               </svg>
               <p className="text-gray-500 font-medium">No enrollments found</p>
               <p className="text-gray-400 text-sm mt-1">
-                {searchQuery ? "Try a different search term" : "Add an enrollment to get started"}
+                {searchQuery ? `No results for "${searchQuery}". Try a different search term.` : "Add an enrollment to get started"}
               </p>
             </div>
           ) : (

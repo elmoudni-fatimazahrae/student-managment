@@ -144,7 +144,7 @@ export default function StudentsPage() {
 
   const filteredStudents = students.filter(
     (s) =>
-      `${s.firstName} ${s.lastName} ${s.email} ${s.major || ""} ${s.city || ""}`
+      `${s.id} ${s.firstName} ${s.lastName} ${s.email} ${s.phone || ""} ${s.major || ""} ${s.city || ""} ${s.status}`
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
   )
@@ -180,7 +180,11 @@ export default function StudentsPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Delete Student</h3>
-              <p className="text-gray-500 mb-6">Are you sure you want to delete this student? This action cannot be undone.</p>
+              <p className="text-gray-500 mb-6">
+                Are you sure you want to delete <span className="font-semibold text-gray-900">
+                  {students.find(s => s.id === deleteConfirm)?.firstName} {students.find(s => s.id === deleteConfirm)?.lastName}
+                </span>? This will also remove all their enrollments. This action cannot be undone.
+              </p>
               <div className="flex gap-3 justify-center">
                 <button onClick={() => setDeleteConfirm(null)} className="btn-secondary">Cancel</button>
                 <button onClick={() => handleDelete(deleteConfirm)} className="btn-danger">Delete</button>
@@ -289,7 +293,7 @@ export default function StudentsPage() {
             </svg>
             <input
               type="text"
-              placeholder="Search students..."
+              placeholder="Search by name, email, phone, major, city..."
               className="input-field pl-10"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -316,7 +320,7 @@ export default function StudentsPage() {
               </svg>
               <p className="text-gray-500 font-medium">No students found</p>
               <p className="text-gray-400 text-sm mt-1">
-                {searchQuery ? "Try a different search term" : "Add a student to get started"}
+                {searchQuery ? `No results for "${searchQuery}". Try a different search term.` : "Add a student to get started"}
               </p>
             </div>
           ) : (

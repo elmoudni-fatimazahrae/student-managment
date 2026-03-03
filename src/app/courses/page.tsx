@@ -143,7 +143,7 @@ export default function CoursesPage() {
 
   const filteredCourses = courses.filter(
     (c) =>
-      `${c.code} ${c.title} ${c.description || ""}`
+      `${c.id} ${c.code} ${c.title} ${c.description || ""} ${c.credits} Semester ${c.semester}`
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
   )
@@ -179,7 +179,8 @@ export default function CoursesPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Delete Course</h3>
-              <p className="text-gray-500 mb-6">Are you sure you want to delete this course? This action cannot be undone.</p>
+              <p className="text-gray-500 mb-2">Are you sure you want to delete <strong>{courses.find(c => c.id === deleteConfirm)?.code} — {courses.find(c => c.id === deleteConfirm)?.title}</strong>?</p>
+              <p className="text-red-500 text-sm mb-6">This will also remove all related enrollments. This action cannot be undone.</p>
               <div className="flex gap-3 justify-center">
                 <button onClick={() => setDeleteConfirm(null)} className="btn-secondary">Cancel</button>
                 <button onClick={() => handleDelete(deleteConfirm)} className="btn-danger">Delete</button>
@@ -274,7 +275,7 @@ export default function CoursesPage() {
             <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
-            <input type="text" placeholder="Search courses..." className="input-field pl-10"
+            <input type="text" placeholder="Search by code, title, semester, description..." className="input-field pl-10"
               value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           </div>
         </div>
@@ -298,7 +299,7 @@ export default function CoursesPage() {
               </svg>
               <p className="text-gray-500 font-medium">No courses found</p>
               <p className="text-gray-400 text-sm mt-1">
-                {searchQuery ? "Try a different search term" : "Add a course to get started"}
+                {searchQuery ? `No results for "${searchQuery}". Try a different search term.` : "Add a course to get started"}
               </p>
             </div>
           ) : (

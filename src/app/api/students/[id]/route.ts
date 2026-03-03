@@ -89,8 +89,15 @@ export async function DELETE(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
+    const studentId = parseInt(params.id)
+
+    // Delete related enrollments first (cascade)
+    await prisma.enrollment.deleteMany({
+      where: { studentId },
+    })
+
     await prisma.student.delete({
-      where: { id: parseInt(params.id) },
+      where: { id: studentId },
     })
 
     return NextResponse.json({ message: "Student deleted successfully" })
