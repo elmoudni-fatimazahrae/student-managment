@@ -6,7 +6,6 @@ dist/
 *.db-journal
 .env.local
 .env.*.local
-.env
 .DS_Store
 *.pem
 .idea/
